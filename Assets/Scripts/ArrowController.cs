@@ -9,10 +9,10 @@ public class ArrowController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         this.player = GameObject.Find("player");
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    }
+
+    // Update is called once per frame
+    void Update () {
         transform.Translate(0, -0.1f, 0);
 
         if (transform.position.y < - 5.0f)
@@ -30,6 +30,16 @@ public class ArrowController : MonoBehaviour {
 
         if (d < r1 + r2)
         {
+            GameObject director = GameObject.FindWithTag("GameMaster");
+            if (director)
+            {
+                director.GetComponent<GameMasterScript>().DecreaseHp();
+            }
+            else
+            {
+                Debug.Log("No director");
+            }
+
             Destroy(gameObject);
         }
     }
